@@ -1,8 +1,9 @@
 import Head from "next/head";
 import styles from "./Home.module.css";
 import { PokemonList } from "@/components/PokemonList/PokemonList";
+import React from 'react'
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Head>
@@ -14,6 +15,7 @@ export default function Home() {
       <main className={styles.container}>
         <PokemonList />
       </main>
-    </>
-  );
+    </>  )
 }
+
+export default Home

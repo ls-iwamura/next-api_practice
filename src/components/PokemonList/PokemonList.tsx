@@ -36,12 +36,12 @@ export const PokemonList: React.FC<Props> = () => {
     return () => controller.abort();
   }, []);
 
-  if (isLoading) {
-    return <div>...Loading</div>;
+  if (error) {
+    return <div className={styles.error_message}>{error.message}</div>;
   }
 
-  if (error) {
-    return <div>{error.message}</div>;
+  if (isLoading) {
+    return <div className={styles.loading_message}>...Loading</div>;
   }
 
   return (
