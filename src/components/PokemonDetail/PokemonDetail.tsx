@@ -1,45 +1,24 @@
-import { PokemonDetailType } from "@/types/pokemon";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import styles from "./PokemonDetail.module.css";
+import React from "react";
 import Image from "next/image";
+import styles from "./PokemonDetail.module.css";
+import useFetch from "@/hooks/useFetch";
+import { PokemonDetailType } from "@/types/pokemon";
 
 type Props = {
   pokemonName: string;
 };
 
 export const PokemonDetail: React.FC<Props> = ({ pokemonName }) => {
-  const [pokemon, setPokemon] = useState<PokemonDetailType>();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error>();
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const fetchPokemon = async () => {
-      setIsLoading(true);
-      try {
-        const res = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
-          {
-            signal: controller.signal,
-          }
-        );
-        setPokemon(res.data);
-        setError(undefined);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchPokemon();
-    return () => controller.abort();
-  }, [pokemonName]);
+  const {
+    data: pokemon,
+    isLoading,
+    error,
+  } = useFetch<PokemonDetailType>(
+    `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
+  );
 
   if (error) {
-    return <div className={styles.error_message}>{error.message}</div>;
+    return <div className={styles.error_message}>{error.response?.status}</div>;
   }
 
   if (isLoading || pokemon == null) {

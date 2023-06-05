@@ -1,7 +1,7 @@
-import { PokemonItemType } from "@/types/pokemon";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
 import styles from "./PokemonItem.module.css";
+import { PokemonItemType } from "@/types/pokemon";
 
 type Props = {
   pokemon: PokemonItemType;
