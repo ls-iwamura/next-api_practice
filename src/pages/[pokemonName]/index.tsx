@@ -5,20 +5,7 @@ import { PokemonDetail } from "@/components/PokemonDetail/PokemonDetail";
 import Head from "next/head";
 import Link from "next/link";
 
-const isString = (value: unknown): value is string => {
-  if (typeof value === "string") {
-    return true;
-  }
-  return false;
-};
-
 const Detail = () => {
-  const router = useRouter();
-
-  if (!isString(router.query.pokemonName)) {
-    return <>クエリパラメータが正しく有りません</>;
-  }
-  
   return (
     <>
       <Head>
@@ -31,7 +18,7 @@ const Detail = () => {
           <Link href="/" className={styles.back_link}>Back</Link>
         </div>
         <div className={styles.detail_wrapper}>
-          <PokemonDetail pokemonName={router.query.pokemonName} />
+          <PokemonDetail />
         </div>
       </main>
     </>

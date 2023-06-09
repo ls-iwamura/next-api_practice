@@ -3,12 +3,13 @@ import Image from "next/image";
 import styles from "./PokemonDetail.module.css";
 import useFetch from "@/hooks/useFetch";
 import { PokemonDetailType } from "@/types/pokemon";
+import { useRouter } from "next/router";
 
-type Props = {
-  pokemonName: string;
-};
+type Props = {};
 
-export const PokemonDetail: React.FC<Props> = ({ pokemonName }) => {
+export const PokemonDetail: React.FC<Props> = () => {
+  const router = useRouter();
+  const { pokemonName } = router.query;
   const {
     data: pokemon,
     isLoading,
