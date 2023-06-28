@@ -6,6 +6,10 @@ import Head from "next/head";
 import Link from "next/link";
 
 const Detail = () => {
+  const router = useRouter();
+  if (!router.isReady) {
+    return null;
+  }
   return (
     <>
       <Head>
@@ -15,7 +19,9 @@ const Detail = () => {
       </Head>
       <main className={styles.container}>
         <div className={styles.back_link_wrapper}>
-          <Link href="/" className={styles.back_link}>Back</Link>
+          <Link href="/" className={styles.back_link}>
+            Back
+          </Link>
         </div>
         <div className={styles.detail_wrapper}>
           <PokemonDetail />
